@@ -26,7 +26,7 @@ services:
       MYSQL_USER: sequelize_test
       MYSQL_PASSWORD: sequelize_test
     ports:
-      - "127.0.0.1:8998:3306"
+      - "127.0.0.1:8999:3306"
   mysql-56:
     image: mysql:5.6
     environment:
@@ -35,7 +35,7 @@ services:
       MYSQL_USER: sequelize_test
       MYSQL_PASSWORD: sequelize_test
     ports:
-      - "127.0.0.1:8998:3306"
+      - "127.0.0.1:8999:3306"
   mysql-55:
     image: mysql:5.5
     environment:
@@ -44,4 +44,4 @@ services:
       MYSQL_USER: sequelize_test
       MYSQL_PASSWORD: sequelize_test
     ports:
-      - "127.0.0.1:8998:3306"
+      - "127.0.0.1:8999:3306"
