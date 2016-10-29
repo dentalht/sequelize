@@ -35,7 +35,8 @@ env:
 
 before_script:
   - "if [ $POSTGRES_VER ] || [ $MYSQL_VER ]; then docker-compose up -d ${POSTGRES_VER} ${MYSQL_VER}; fi"
-  - "sleep 30s" # This allows enough time for docker to get up and running before tests occur
+  - "if [ $POSTGRES_VER ]; then docker run -e CHECK_PORT=${SEQ_PG_PORT} -e CHECK_HOST=${SEQ_PG_HOST} giorgos/takis; fi"
+  - "if [ $MYSQL_VER ]; then docker run -e CHECK_PORT=${SEQ_MYSQL_PORT} -e CHECK_HOST=${SEQ_MYSQL_HOST} giorgos/takis; fi"
 
 script:
   - "if [ $COVERAGE ]; then npm run cover && bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info; else npm run test; fi"
