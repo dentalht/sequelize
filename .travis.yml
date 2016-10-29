@@ -35,6 +35,7 @@ env:
 
 before_script:
   - "if [ $POSTGRES_VER ] || [ $MYSQL_VER ]; then docker-compose up -d ${POSTGRES_VER} ${MYSQL_VER}; fi"
-  - "if [ $POSTGRES_VER ] || [ $MYSQL_VER ]; then docker run --link ${POSTGRES_VER}${MYSQL_VER}:db -e CHECK_PORT=${SEQ_MYSQL_PORT} -e CHECK_HOST=db giorgos/takis; fi"
+  - "if [ $MYSQL_VER ]; then docker run --link ${MYSQL_VER}:db -e CHECK_PORT=${SEQ_MYSQL_PORT} -e CHECK_HOST=db giorgos/takis; fi"
+  - "if [ $POSTGRES_VER ]; then docker run --link ${POSTGRES_VER}:db -e CHECK_PORT=${SEQ_MYSQL_PORT} -e CHECK_HOST=db giorgos/takis; fi"
 script:
   - "if [ $COVERAGE ]; then npm run cover && bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info; else npm run test; fi"
